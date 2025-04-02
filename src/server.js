@@ -1,4 +1,4 @@
-import express from "express";
+import express, { urlencoded } from "express";
 import "dotenv/config";
 import userRoutes from "./routes/user/user.routes.js";
 import errorHandler from "./middleware/errorMiddleware.js";
@@ -11,13 +11,11 @@ app.use(
     limit: "50mb",
   })
 );
+app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/v1/user", userRoutes);
-app.get("*", (req, res) => {
-  res.send("hello");
-});
 
-app.use(errorHandler)
+app.use(errorHandler);
 
 app.listen(PORT, () => {
   console.log(`server is running on port ${PORT}`);
