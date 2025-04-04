@@ -1,4 +1,3 @@
-import Joi from "joi";
 import { INTERNAL_SERVER_ERROR } from "../constants/http.js";
 
 const errorHandler = (err, req, res, next) => {

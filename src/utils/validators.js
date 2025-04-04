@@ -1,6 +1,6 @@
 import Joi from "joi";
 
-const userSchema = Joi.object({
+const signUpSchema = Joi.object({
   nickName: Joi.string().min(2).max(25).required(),
   email: Joi.string().email().min(2).max(25).required(),
   password: Joi.string().min(6).max(255).required(),
@@ -11,5 +11,13 @@ const userSchema = Joi.object({
   profileImage: Joi.string(),
 });
 
-export const validateUser = (userInfo) =>
-  userSchema.validate(userInfo, { abortEarly: false });
+export const signUpValidator = (credentials) =>
+  signUpSchema.validate(credentials, { abortEarly: false });
+
+const LoginSchema = Joi.object({
+  nickName: Joi.string().min(2).max(25).required(),
+  password: Joi.string().min(6).max(255).required(),
+});
+
+export const logInValidator = (credentials) =>
+  LoginSchema.validate(credentials, { abortEarly: false });
