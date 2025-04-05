@@ -15,5 +15,7 @@ model User{
   password String
   profileImage String?
   createdAt DateTime @default(now())
+  resetToken String?
+  resetTokenExpiry DateTime?
 }
 
