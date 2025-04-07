@@ -1,26 +1,19 @@
-import nodemailer from "nodemailer";
+import resend from "../config/resend.js";
+import { forgotPasswordCodeTemplate } from "../constants/emailTemplates.js";
 
+const recipientEmail = (to) =>
+  process.env.NODE_ENV === "development" ? "achimilorava16@gmail.com" : to;
 
-export const sendEmail = async (to, resetToken, next) => {
-  try {
-    const transporter = nodemailer.createTransport({
-      host: process.env.MAIL_HOST,
-      port: process.env.MAIL_PORT,
-      auth: {
-        user: process.env.MAIL_USER,
-        pass: process.env.MAIL_PASS,
-      },
-    });
+const senderEmail = () =>
+  process.env.NODE_ENV === "development"
+    ? "onboarding@resend.dev"
+    : process.env.EMAIL_SENDER;
 
-
-    await transporter.sendMail({
-      from: `"Your App" <achis@gmail.com>`,
-      to,
-      subject: "reset password",
-      html: `<p> Please use this code to reset your password: ${resetToken}  </p>`,
-    });
-  } catch (error) {
-    console.log(error);
-    next(error);
-  }
+export const handleTokenEmailSend = async (receiver, payload) => {
+  await resend.emails.send({
+    from: senderEmail(),
+    to: [recipientEmail(receiver)],
+    subject: "Password code",
+    html: forgotPasswordCodeTemplate(payload),
+  });
 };

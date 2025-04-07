@@ -5,7 +5,7 @@ import prisma from "../../utils/prisma.js";
 import { hashPassword, comparePassword } from "../../utils/hashPassword.js";
 import { handleAccessToken } from "../../utils/accessToken.js";
 import crypto from "crypto";
-import { sendEmail } from "../../utils/sendEmail.js";
+import { handleTokenEmailSend } from "../../utils/sendEmail.js";
 
 export const createUser = async (req, res, next) => {
   try {
@@ -140,7 +140,7 @@ export const handleForgotPassword = async (req, res, next) => {
       },
     });
 
-    await sendEmail(email, resetToken);
+      await handleTokenEmailSend(email, resetToken);
 
     res
       .status(200)
@@ -184,4 +184,4 @@ export const handleResetPassword = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-}
+};
