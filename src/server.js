@@ -15,6 +15,8 @@ app.use(
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
+
+app.use("/", (req, res) => res.status(200).json({"message": "Welcome to mu backend"}))
 app.use("/api/v1/user", userRoutes);
 
 app.use(errorHandler);
