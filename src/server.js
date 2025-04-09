@@ -22,10 +22,13 @@ app.use(
     credentials: true,
   })
 );
-app.use("/", (req, res) =>
-  res.status(200).json({ message: "Welcome to mu backend" })
-);
+app.get("/", (req, res) => {
+  res.status(200).json({ message: "Welcome to my backend" });
+});
 app.use("/api/v1/user", userRoutes);
+app.use("*", (req, res) =>
+  res.status(200).json({ message: "Route not found" })
+);
 
 app.use(errorHandler);
 
