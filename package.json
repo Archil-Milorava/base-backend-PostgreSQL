@@ -7,7 +7,7 @@
   "scripts": {
     "watch": "nodemon src/server.js",
     "start": "node src/server.js",
-    "install": "npm install"
+    "build": "npm install"
   },
   "keywords": [],
   "author": "",
