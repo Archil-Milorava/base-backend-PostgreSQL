@@ -16,7 +16,7 @@ export const signUpValidator = (credentials) =>
 
 const LoginSchema = Joi.object({
   nickName: Joi.string().min(2).max(255).required(),
-  password: Joi.string().min(6).max(255).required(),
+  password: Joi.string().min(0).max(255).required(),
 });
 
 export const logInValidator = (credentials) =>

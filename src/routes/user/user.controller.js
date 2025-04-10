@@ -55,7 +55,7 @@ export const signIn = async (req, res, next) => {
     const { nickName, password } = value;
 
     if (error) {
-      throw new appError("all fields required", BAD_REQUEST);
+      throw new appError(error, BAD_REQUEST);
     }
 
     const user = await prisma.user.findUnique({ where: { nickName } });
@@ -67,7 +67,7 @@ export const signIn = async (req, res, next) => {
     const isPasswordValid = await comparePassword(password, user.password);
 
     if (!isPasswordValid) {
-      throw new appError("Invalid credentials");
+      throw new appError("Wrong credentials");
     }
 
     handleAccessToken(user.id, res);
