@@ -7,7 +7,7 @@ const userRoutes = express.Router()
 userRoutes.post("/signUp", createUser)
 userRoutes.post("/signIn", signIn)
 userRoutes.post("/signOut", signOut)
-userRoutes.post("/currentUser", protectRoute, getCurrentUser)
+userRoutes.get("/currentUser", protectRoute, getCurrentUser)
 userRoutes.patch("/forgot-password", handleForgotPassword )
 userRoutes.patch("/reset-password", handleResetPassword )
 
