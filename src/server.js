@@ -4,6 +4,7 @@ import "dotenv/config";
 import express from "express";
 import errorHandler from "./middleware/errorMiddleware.js";
 import userRoutes from "./routes/user/user.routes.js";
+import { BAD_REQUEST } from "./constants/http.js";
 
 const app = express();
 const PORT = process.env.PORT || 8000;
@@ -28,7 +29,7 @@ app.get("/", (req, res) => {
 });
 app.use("/api/v1/user", userRoutes);
 app.use("*", (req, res) =>
-  res.status(200).json({ message: "Route not found" })
+  res.status(BAD_REQUEST).json({ message: "Route not found" })
 );
 
 app.use(errorHandler);
