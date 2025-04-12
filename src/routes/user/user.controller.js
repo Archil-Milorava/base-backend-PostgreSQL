@@ -52,11 +52,11 @@ export const signIn = async (req, res, next) => {
   try {
     const { error, value } = logInValidator(req.body);
 
-    const { nickName, password } = value;
-
     if (error) {
       throw new appError(error, BAD_REQUEST);
     }
+
+    const { nickName, password } = value;
 
     const user = await prisma.user.findUnique({ where: { nickName } });
 
@@ -140,7 +140,7 @@ export const handleForgotPassword = async (req, res, next) => {
       },
     });
 
-      await handleTokenEmailSend(email, resetToken);
+    await handleTokenEmailSend(email, resetToken);
 
     res
       .status(200)
