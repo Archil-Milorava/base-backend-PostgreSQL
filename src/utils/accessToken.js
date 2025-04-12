@@ -8,7 +8,7 @@ export const handleAccessToken = (userId, res) => {
   res.cookie("accessToken", accessToken, {
     maxAge: 360 * 24 * 60 * 60 * 1000,
     httpOnly: true,
-    sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
+    sameSite: process.env.NODE_ENV === "production" ? "lax" : "strict",
     secure: false,
   });
 
